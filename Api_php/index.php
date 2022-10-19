@@ -29,11 +29,8 @@
   $method = $_SERVER["REQUEST_METHOD"];
   $GLOBAIS['secretJWT'] = '123456';
 
+  include_once "classes/autoload.class.php";
+  new Autoload();
 
-  include_once "classes/db.classe.php";
-  include_once "classes/jwt.class.php";
-  include_once "classes/usuarios.class.php";
-
-  include_once "usuarios/usuarios.php";
-  include_once "api/clientes/clientes.php";
+  
 ?>  

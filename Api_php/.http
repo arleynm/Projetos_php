@@ -1,0 +1,7 @@
+###login
+
+POST http://localhost/php_api/usuarios/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+login=aleyaugusto
+&senha=123456
