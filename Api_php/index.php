@@ -1,36 +1,21 @@
 <?php
-  header('Access-Control-Allow-Origin: *');
-  header('Content-type:aplication/json');
+header('Access-Control-Allow-Origin: *');
+header('Content-type: application/json');
 
-  date_default_timezone_set("America/Sao_Paulo");
+date_default_timezone_set("America/Sao_Paulo");
 
-  if(isset ($_GET['path'])){
-    $path= explode("/", $_GE['path']);
-  }else{
-    echo "Esse caminho não existe!";exit;
-  }
+$GLOBALS['secretJWT'] = '123456';
 
-  if(isset($path[0])){
-    $api = $path;
-  }else {
-    echo "Caminho não existe!"; exit;
-  }
-  if(isset($path[1])){
-    $acao = $path;
-  }else {
-    $acao = '';
-  }
-  if(isset($path[2])){
-    $param = $path;
-  }else {
-    $param = '';
-  }
+# Autoload
 
-  $method = $_SERVER["REQUEST_METHOD"];
-  $GLOBAIS['secretJWT'] = '123456';
+include_once "classes/autoload.class.php";
+new Autoload();
 
-  include_once "classes/autoload.class.php";
-  new Autoload();
+# Rotas
 
-  
-?>  
+$rota = new Rotas();
+$rota->add('POST', '/usuarios/login', 'Usuarios::login', false);
+$rota->add('GET', '/clientes/listar', 'Clientes::listarTodos', true);
+$rota->add('GET', '/clientes/listar/[PARAM]', 'Clientes::listarUnico', true);
+$rota->add('PUT', '/clientes/atualizar/[PARAM]', 'Clientes::atualizar', true);
+$rota->ir($_GET['path']);
